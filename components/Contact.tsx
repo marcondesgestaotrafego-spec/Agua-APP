@@ -18,7 +18,7 @@ const Contact: React.FC = () => {
 
             <div className="space-y-6">
               <a 
-                href="https://wa.me/5511999999999?text=Olá, gostaria de fazer um pedido!" 
+                href="https://wa.me/5548996148333?text=Ol%C3%A1%21+Gostaria+de+fazer+um+pedido" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 group p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors border border-white/5"
@@ -28,20 +28,20 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase font-bold">WhatsApp (Pedidos Rápido)</p>
-                  <p className="text-white text-lg font-medium">(11) 99999-9999</p>
+                  <p className="text-white text-lg font-medium">(48) 99614-8333</p>
                 </div>
               </a>
 
               <a 
-                href="tel:08001234567"
+                href="tel:5548996148333"
                 className="flex items-center gap-4 p-4 rounded-2xl hover:bg-white/5 transition-colors"
               >
                 <div className="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center text-primary-400">
                   <Phone size={24} />
                 </div>
                 <div>
-                   <p className="text-xs text-gray-500 uppercase font-bold">Telefone Fixo</p>
-                   <p className="text-white text-lg font-medium">0800 123 4567</p>
+                   <p className="text-xs text-gray-500 uppercase font-bold">Telefone</p>
+                   <p className="text-white text-lg font-medium">(48) 99614-8333</p>
                 </div>
               </a>
 
@@ -51,7 +51,8 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                    <p className="text-xs text-gray-500 uppercase font-bold">Nossa Loja</p>
-                   <p className="text-white text-lg font-medium">Av. Central, 1000 - Centro</p>
+                   <p className="text-white text-lg font-medium">Av. das Tipuanas, 670 - Palhoça, SC</p>
+                   <p className="text-sm text-gray-400">Ao lado da Gaby Farma Associados</p>
                 </div>
               </div>
             </div>
@@ -64,7 +65,7 @@ const Contact: React.FC = () => {
                 <div className="text-center opacity-30">
                     <MapPin size={64} className="mx-auto mb-2 text-primary-500" />
                     <span className="text-2xl font-display font-bold text-white">Área de Cobertura</span>
-                    <p>Raio de 10km do Centro</p>
+                    <p>Palhoça e Região</p>
                 </div>
              </div>
              {/* Decorative circles indicating coverage */}
@@ -80,7 +81,7 @@ const Contact: React.FC = () => {
       <div className="border-t border-white/5 py-8 bg-dark-950">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
              <div className="text-center md:text-left">
-                <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} FastGas & Água. Todos os direitos reservados.</p>
+                <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} FastGas & Água (JR Domingos). Todos os direitos reservados.</p>
              </div>
              <div className="flex gap-6 text-sm text-gray-500">
                 <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>

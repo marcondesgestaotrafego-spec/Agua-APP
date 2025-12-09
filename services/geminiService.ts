@@ -3,7 +3,7 @@ import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const SYSTEM_INSTRUCTION = `
-Você é o atendente virtual inteligente da "FastGas & Água", uma distribuidora de bebidas e gás de cozinha moderna e rápida.
+Você é o atendente virtual inteligente da "JR Domingos Gás & Água" (FastGas), uma distribuidora de bebidas e gás de cozinha em Palhoça - SC.
 
 Suas responsabilidades:
 1. Atender clientes de forma educada, rápida e proativa.
@@ -12,16 +12,17 @@ Suas responsabilidades:
 4. Incentivar o pedido pelo WhatsApp ou diretamente pelo chat (simulando).
 
 Nossos Produtos e Preços (Use como referência):
-- Gás de Cozinha P13: R$ 115,00 (Dinheiro/Pix) ou R$ 120,00 (Cartão).
+- Gás de Cozinha P13 (Liquigás): R$ 115,00 (Dinheiro/Pix) ou R$ 120,00 (Cartão).
 - Gás Industrial P45: R$ 420,00.
 - Água Mineral 20L (Galão): R$ 15,00 (Com o casco: R$ 40,00).
 - Fardo Água 500ml (12 unidades): R$ 25,00.
 
 Informações de Serviço:
+- Endereço: Avenida das Tipuanas, 670, Palhoça - SC (Ao lado da Gaby Farma Associados).
 - Horário: Segunda a Sábado das 08h às 20h. Domingo das 08h às 14h.
-- Tempo médio de entrega: 30 minutos.
+- Tempo médio de entrega: 30 minutos em Palhoça.
 - Formas de Pagamento: Pix, Cartão de Crédito/Débito (levamos maquininha), Dinheiro.
-- Região de Entrega: Atendemos num raio de 10km do Centro. Use o Maps para dar referências próximas ao cliente se ele compartilhar a localização.
+- Região de Entrega: Palhoça e região próxima. Use o Maps para dar referências próximas ao cliente se ele compartilhar a localização.
 
 Personalidade:
 - Seja prestativo e use emojis ocasionais (🔥, 💧, 🚚, 📍).
@@ -88,6 +89,24 @@ export const sendMessageToGemini = async (message: string): Promise<GeminiRespon
     };
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return { text: "Nosso sistema está com uma breve instabilidade. Pode nos chamar no WhatsApp? (Link no topo da página)" };
+    
+    // Fallback: If map/grounding fails (often due to permissions or network), retry without tools
+    try {
+        console.log("Retrying without tools...");
+        const fallbackAi = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        const fallbackChat = fallbackAi.chats.create({
+            model: 'gemini-2.5-flash',
+            config: {
+                systemInstruction: SYSTEM_INSTRUCTION // Keep instructions, remove tools
+            }
+        });
+        const fallbackResult = await fallbackChat.sendMessage({ message });
+        return {
+            text: fallbackResult.text || "Pode me chamar no WhatsApp? O link está no topo.",
+            groundingChunks: []
+        };
+    } catch (fallbackError) {
+        return { text: "Nosso sistema está com uma breve instabilidade. Pode nos chamar no WhatsApp? (Link no topo da página)" };
+    }
   }
 };
