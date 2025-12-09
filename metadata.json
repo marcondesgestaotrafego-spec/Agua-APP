@@ -1,0 +1,7 @@
+{
+  "name": "Copy of FastGas & Água Delivery",
+  "description": "Peça seu gás de cozinha e água mineral com entrega rápida. O melhor preço e atendimento da região.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
